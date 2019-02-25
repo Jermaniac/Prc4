@@ -3,6 +3,7 @@ package practicas;
 public class Grafo {
 	int estados;
 	String matrix[][];
+	private int count=0;
 	
 	public Grafo (int numestados) {
 		this.estados=numestados;
@@ -14,45 +15,68 @@ public class Grafo {
 		}
 		
 	}
-	public void insertarArista (char v1, char v2,String valor) {
-		int coor1 =0, coor2=0;
-		
-	switch (v1){
-		case 'S': coor1=0;
+	public int traducir ( String t) {
+		int resul=0;
+		if(t.length()==1) {
+		switch (t){
+		case "S": resul=0;
 		break;
-		case 'A': coor1=1;
+		case "A": resul=1;
 		break;
-		case 'B': coor1=2;
+		case "B": resul=2;
 		break;
-		case 'C': coor1=3;
+		case "C": resul=3;
 		break;
-		case 'D': coor1=4;
+		case "D": resul=4;
 		break;
-		case 'E': coor1=5;
+		case "E": resul=5;
 		break;
-		case 'F': coor1=6;
+		case "F": resul=6;
 		break;
 	}
-	switch (v2){
-		case 'S': coor2=0;
-		break;
-		case 'A': coor2=1;
-		break;
-		case 'B': coor2=2;
-		break;
-		case 'C': coor2=3;
-		break;
-		case 'D': coor2=4;
-		break;
-		case 'E': coor2=5;
-		break;
-		case 'F': coor2=6;
-		break;
-
-}
-	matrix[coor1][coor2] = valor;
+		}
+		else {
+			return Integer.parseInt(""+t.charAt(1));
+			
+		}
+		return resul;
+	}
+	public String traducir2 ( int t2) {
+		String resul=" ";
+			switch (t2){
+			case 0: resul="p0";
+			count++;
+			break;
+			case 1: resul="p1";
+			count++;
+			break;
+			case 2: resul="p2";
+			count++;
+			break;
+			case 3: resul="p3";
+			count++;
+			break;
+			case 4: resul="p4";
+			count++;
+			break;
+			case 5: resul="p5";
+			count++;
+			break;
+			case 6: resul="p6";
+			count++;
+			break;
+			case 7: resul="p7";
+			count++;
+			break;
+			}
+		return resul;
+	}
+	
+	public void insertarArista (String v1, String v2,String valor) {
+	matrix[traducir(v1)][traducir(v2)] = valor;
 	}
 	public void representar () {
+		int count;
 		for (int i=0; i < estados ; i ++) {
 			System.out.println(" ");
 			for (int j=0; j < estados; j++) {
@@ -60,6 +84,22 @@ public class Grafo {
 			}
 		}
 		
+		System.out.println(" ");
+		for ( int k=0;k<matrix.length;k++) {
+			count=0;
+			System.out.println(" ");
+			System.out.print("Vertice "+traducir2(k)+": ");
+			for (int i=0; i < estados ; i ++) {
+			if(matrix[k][i] != " ") {
+				System.out.print(" conecta "+traducir2(i)+ " con arista "+matrix[k][i]+ " | ");
+				count++;
+			}
+			}
+			if(count==0) System.out.print(" no conecta");
+		}
+			System.out.println(" ");
+			
+		}
 		
-	}
+		
 }
